@@ -2,10 +2,12 @@
 require "config/Conexion.php";
 
 $datos = json_decode(file_get_contents('php://input'), true);
+header('Content-Type: application/json');
 
 switch($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        $sql = "SELECT id_u, nombre, correo, contraseña FROM usuarios";
+        header('Content-Type: application/json');
+        $sql = "SELECT id_u, nombre, correo, contrasena FROM usuarios";
         $result = $conexion->query($sql);
 
         if ($result->num_rows > 0) {
@@ -23,10 +25,10 @@ switch($_SERVER['REQUEST_METHOD']) {
     case 'POST':
         $nombre = $datos['nombre'];
         $correo = $datos['correo'];
-        $contraseña = password_hash($datos['contraseña'], PASSWORD_DEFAULT);
+        $contrasena = password_hash($datos['contrasena'], PASSWORD_DEFAULT);
 
-        $stmt = $conexion->prepare("INSERT INTO usuarios (nombre, correo, contraseña) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $nombre, $correo, $contraseña);
+        $stmt = $conexion->prepare("INSERT INTO usuarios (nombre, correo, contrasena) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $nombre, $correo, $contrasena);
 
         if ($stmt->execute()) {
             echo "Datos insertados con éxito.";
@@ -40,7 +42,7 @@ switch($_SERVER['REQUEST_METHOD']) {
         $id = $datos['id_u'];
         $nombre = $datos['nombre'];
         $correo = $datos['correo'];
-        $contraseña = password_hash($datos['contraseña'], PASSWORD_DEFAULT);
+        $contrasena = password_hash($datos['contrasena'], PASSWORD_DEFAULT);
 
         $actualizaciones = array();
         if (!empty($nombre)) {
@@ -49,8 +51,8 @@ switch($_SERVER['REQUEST_METHOD']) {
         if (!empty($correo)) {
             $actualizaciones[] = "correo = '$correo'";
         }
-        if (!empty($contraseña)) {
-            $actualizaciones[] = "contraseña = '$contraseña'";
+        if (!empty($contrasena)) {
+            $actualizaciones[] = "contrasena = '$contrasena'";
         }
 
         $actualizaciones_str = implode(', ', $actualizaciones);
@@ -67,9 +69,9 @@ switch($_SERVER['REQUEST_METHOD']) {
         $id = $datos['id_u'];
         $nombre = $datos['nombre'];
         $correo = $datos['correo'];
-        $contraseña = password_hash($datos['contraseña'], PASSWORD_DEFAULT);
+        $contrasena = password_hash($datos['contrasena'], PASSWORD_DEFAULT);
 
-        $sql = "UPDATE usuarios SET nombre = '$nombre', correo = '$correo', contraseña = '$contraseña' WHERE id_u = $id_u";
+        $sql = "UPDATE usuarios SET nombre = '$nombre', correo = '$correo', contrasena = '$contrasena' WHERE id_u = $id_u";
 
         if ($conexion->query($sql) === TRUE) {
             echo "Registro actualizado con éxito.";
@@ -78,23 +80,24 @@ switch($_SERVER['REQUEST_METHOD']) {
         }
         break;
 
-    case 'DELETE':
-        $id = $datos['id_u'];
-        
-        $stmt = $conexion->prepare("DELETE FROM usuarios WHERE id_u = ?");
-        $stmt->bind_param("i", $id_u);
-        
-        if ($stmt->execute()) {
-            echo "Registro eliminado con éxito.";
-        } else {
-            echo "Error al eliminar registro: " . $stmt->error;
-        }
-        $stmt->close();
-        break;
+        case 'DELETE':
+            $id = $datos['id_u'];
             
-    default:
-        echo "Método de solicitud no válido.";
-        break;
+            $stmt = $conexion->prepare("DELETE FROM usuarios WHERE id_u = ?");
+            $stmt->bind_param("i", $id); // Aquí es donde se hizo el cambio
+            
+            if ($stmt->execute()) {
+                echo "Registro eliminado con éxito.";
+            } else {
+                echo "Error al eliminar registro: " . $stmt->error;
+            }
+            $stmt->close();
+            break;
+                
+        default:
+            echo "Método de solicitud no válido.";
+            break;
+        
 }
 
 $conexion->close();

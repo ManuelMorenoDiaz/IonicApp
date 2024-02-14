@@ -8,7 +8,7 @@ import { Usuario } from 'src/app/interfaces'; // Importar la clase TopLevel desd
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  id_u?: string;
+  id_u?: number;
   nombre: string = '';
   correo: string = '';
   contrasena: string = '';
@@ -17,7 +17,7 @@ constructor(private apiService: ApiService) {}
 
 enviarDatos() {
   const datos: Usuario = {
-    id_u: 'some-id', // replace 'some-id' with the actual id
+    id_u: this.id_u,
     nombre: this.nombre,
     correo: this.correo,
     contrasena: this.contrasena,
@@ -26,7 +26,7 @@ enviarDatos() {
   this.apiService.postDatos(datos).subscribe(resp => {
     console.log(resp);
   });
-  
+
 
 }
 
