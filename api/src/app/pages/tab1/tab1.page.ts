@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Usuario } from '../../interfaces/index';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+import { ModalController } from '@ionic/angular';
+import { EditarUsuarioModalPage } from './editar-usuario-modal/editar-usuario-modal.page';
 
 @Component({
   selector: 'app-tab1',
@@ -11,17 +13,29 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class Tab1Page implements OnInit {
 public resp: Usuario []=[];
 
-  constructor(private newService: ApiService ) {}
+  constructor(private newService: ApiService, private modalController: ModalController) {}
+
   ngOnInit() {
     this.newService.getTopHeadlines()
       .subscribe(resp => {
         console.log(resp);
         if (Array.isArray(resp)) {
-          this.resp = resp;
+          this.resp = resp.map(item => ({ ...item, editing: false }));
         } else {
-          this.resp = [resp];
+          this.resp = [{ ...resp, editing: false }];
         }
       });
+  }
+
+  async abrirModalEditarUsuario(usuario: Usuario) {
+    const modal = await this.modalController.create({
+      component: EditarUsuarioModalPage,
+      componentProps: {
+        usuario,
+      },
+    });
+
+    await modal.present();
   }
 
   eliminarDato(id_u: number) {
@@ -45,10 +59,4 @@ public resp: Usuario []=[];
       }
     );
   }
-
-
-
-
-
 }
-

@@ -1,35 +1,23 @@
-
-
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Usuarios
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Usuarios</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-grid>
+<ion-content >
+  <ion-grid style="width: 80%;">
     <ion-row>
-      <ion-col>
-        <ion-card *ngFor="let item of resp">
+      <ion-col  style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
+        <ion-card *ngFor="let item of resp" style="background: #f9f9f9; border-radius: 5px; margin: 10px 0; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); width: 250px;">
           <ion-card-header>
             <ion-row class="ion-justify-content-between">
-              <ion-card-title>{{ item.id_u }}</ion-card-title>
-              <ion-button (click)="item.id_u !== undefined && eliminarDato(item.id_u)" shape="round-10" fill="clear"> <ion-icon slot="icon-only"  name="trash-outline"></ion-icon></ion-button>
+              <ion-card-title style="font-weight: bold; color: #4a4a4a;">{{ item.id_u }}</ion-card-title>
+              <ion-button (click)="item.id_u !== undefined && eliminarDato(item.id_u)" shape="round" fill="clear" style="color: #f53d3d;">
+                <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+              </ion-button>
+              <ion-button (click)="abrirModalEditarUsuario(item)" shape="round" fill="clear" style="color: #3880ff;">
+                <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+              </ion-button>
             </ion-row>
           </ion-card-header>
           <ion-card-content>
-            <p>Metricula: {{ item.nombre }}</p>
-            <p>Correo: {{ item.correo }}</p>
-            <p>Contraseña: {{ item.contrasena }}</p>
-
+            <p style="color: #4a4a4a;"><strong>Nombre:</strong> {{ item.nombre }}</p>
+            <p style="color: #4a4a4a;"><strong>Correo:</strong> {{ item.correo }}</p>
+            <p style="color: #4a4a4a;"><strong>Contraseña:</strong> {{ item.contrasena }}</p>
           </ion-card-content>
         </ion-card>
       </ion-col>

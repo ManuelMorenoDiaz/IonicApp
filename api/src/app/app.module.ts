@@ -8,14 +8,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule} from '@angular/common/http';
 
+// Importa el módulo de tu página aquí
+import { EditarUsuarioModalPageModule } from './pages/tab1/editar-usuario-modal/editar-usuario-modal.module';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule, 
-    IonicModule.forRoot(), 
+    BrowserModule,
+    IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
-  
+    HttpClientModule,
+    // Añade el módulo de tu página al array de imports
+    EditarUsuarioModalPageModule
   ],
 
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

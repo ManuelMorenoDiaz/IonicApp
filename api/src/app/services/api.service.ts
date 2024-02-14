@@ -1,3 +1,4 @@
+// ApiService
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Usuario } from '../interfaces';
@@ -27,5 +28,9 @@ export class ApiService {
     return this.http.request('delete', this.apiUrl, options);
   }
 
+  actualizarUsuario(usuario: Usuario): Observable<any> {
+    return this.http.put<any>(this.apiUrl, usuario,);
+  }
 
+  
 }

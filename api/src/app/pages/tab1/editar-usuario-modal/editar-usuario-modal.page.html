@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar style="background-color: #3880ff;">
+    <ion-title style="color: rgb(0, 0, 0);">Editar Usuario</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()" style="color: rgb(255, 0, 0);">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="background-color: #f4f5f8;">
+  <form [formGroup]="formulario">
+    <ion-item lines="none">
+      <ion-input placeholder="Nombre" formControlName="nombre" style="border-bottom: 1px solid #d7d8da;"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-input placeholder="Correo" formControlName="correo" style="border-bottom: 1px solid #d7d8da;"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-input placeholder="Contraseña" formControlName="contrasena" style="border-bottom: 1px solid #d7d8da;"></ion-input>
+    </ion-item>
+    <ion-button expand="full" (click)="guardarCambios()" style="margin-top: 20px; background-color: #3880ff; color: white;">Guardar</ion-button>
+  </form>
+</ion-content>
