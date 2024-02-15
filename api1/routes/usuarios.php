@@ -2,7 +2,6 @@
 require "config/Conexion.php";
 
 $datos = json_decode(file_get_contents('php://input'), true);
-header('Content-Type: application/json');
 
 switch($_SERVER['REQUEST_METHOD']) {
     case 'GET':
@@ -31,14 +30,17 @@ switch($_SERVER['REQUEST_METHOD']) {
         $stmt->bind_param("sss", $nombre, $correo, $contrasena);
 
         if ($stmt->execute()) {
-            echo "Datos insertados con éxito.";
+            echo json_encode(["message" => "Datos insertados con éxito."]);
+           
         } else {
-            echo "Error al insertar datos: " . $stmt->error;
+            echo json_encode(["message" => $stmt->error]);
+           
         }
         $stmt->close();
         break;
 
     case 'PATCH':
+        header('Content-Type: application/json');
         $id = $datos['id_u'];
         $nombre = $datos['nombre'];
         $correo = $datos['correo'];
@@ -59,28 +61,31 @@ switch($_SERVER['REQUEST_METHOD']) {
         $sql = "UPDATE usuarios SET $actualizaciones_str WHERE id_u = $id";
 
         if ($conexion->query($sql) === TRUE) {
-            echo "Registro actualizado con éxito.";
+            echo json_encode(["message" => "Registro actualizado con éxito."]);
         } else {
-            echo "Error al actualizar registro: " . $conexion->error;
+            echo json_encode(["error" => "Error al actualizar registro: " . $conexion->error]);
         }
+        
         break;
 
     case 'PUT':
+        header('Content-Type: application/json');
         $id = $datos['id_u'];
         $nombre = $datos['nombre'];
         $correo = $datos['correo'];
         $contrasena = password_hash($datos['contrasena'], PASSWORD_DEFAULT);
 
-        $sql = "UPDATE usuarios SET nombre = '$nombre', correo = '$correo', contrasena = '$contrasena' WHERE id_u = $id_u";
+        $sql = "UPDATE usuarios SET nombre = '$nombre', correo = '$correo', contrasena = '$contrasena' WHERE id_u = $id";
 
         if ($conexion->query($sql) === TRUE) {
-            echo "Registro actualizado con éxito.";
+            echo json_encode(["message" => "Registro actualizado con éxito."]);
         } else {
-            echo "Error al actualizar registro: " . $conexion->error;
+            echo json_encode(["error" => "Error al actualizar registro: " . $conexion->error]);
         }
+        
         break;
 
-        case 'DELETE':
+    case 'DELETE':
             $id = $datos['id_u'];
             
             $stmt = $conexion->prepare("DELETE FROM usuarios WHERE id_u = ?");
