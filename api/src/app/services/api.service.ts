@@ -19,9 +19,13 @@ export class ApiService {
     );
   }
 
-  // Método para enviar datos por POST
-  postDatos(datos: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, datos,{ responseType: 'text' as 'json'});
+
+  registrarUsuario(usuario: Usuario): Observable<any> {
+    return this.http.post<any>(this.apiUrl, usuario, { responseType: 'text' as 'json' });
+  }
+
+  insertarUsuario(usuario: Usuario): Observable<any> {
+    return this.http.post<any>(this.apiUrl, usuario, { responseType: 'text' as 'json' });
   }
 
   eliminarDato(id: number, options?: any): Observable<{}> {
@@ -32,5 +36,5 @@ export class ApiService {
     return this.http.put<any>(this.apiUrl, usuario,);
   }
 
-  
+
 }

@@ -10,6 +10,8 @@ import { HttpClientModule} from '@angular/common/http';
 
 // Importa el módulo de tu página aquí
 import { EditarUsuarioModalPageModule } from './pages/tab1/editar-usuario-modal/editar-usuario-modal.module';
+import { CrearUsuarioModalPageModule } from './pages/tab1/crear-usuario-modal/crear-usuario-modal.module';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +21,9 @@ import { EditarUsuarioModalPageModule } from './pages/tab1/editar-usuario-modal/
     AppRoutingModule,
     HttpClientModule,
     // Añade el módulo de tu página al array de imports
-    EditarUsuarioModalPageModule
+    EditarUsuarioModalPageModule,
+    CrearUsuarioModalPageModule
+
   ],
 
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

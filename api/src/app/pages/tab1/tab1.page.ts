@@ -4,6 +4,8 @@ import { Usuario } from '../../interfaces/index';
 import { HttpHeaders } from '@angular/common/http';
 import { ModalController } from '@ionic/angular';
 import { EditarUsuarioModalPage } from './editar-usuario-modal/editar-usuario-modal.page';
+import { CrearUsuarioModalPage } from './crear-usuario-modal/crear-usuario-modal.page';
+
 
 @Component({
   selector: 'app-tab1',
@@ -33,6 +35,14 @@ public resp: Usuario []=[];
       componentProps: {
         usuario,
       },
+    });
+
+    await modal.present();
+  }
+
+  async abrirModalCrearUsuario() {
+    const modal = await this.modalController.create({
+      component: CrearUsuarioModalPage,
     });
 
     await modal.present();
