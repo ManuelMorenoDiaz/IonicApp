@@ -19,6 +19,10 @@ export class ApiService {
     );
   }
 
+  loginUsuario(usuario: Usuario): Observable<any> {
+    return this.http.post<any>('http://localhost/api1/login/', usuario, { responseType: 'text' as 'json' });
+  }
+
 
   registrarUsuario(usuario: Usuario): Observable<any> {
     return this.http.post<any>(this.apiUrl, usuario, { responseType: 'text' as 'json' });
