@@ -1,10 +1,12 @@
 <?php
+        header('Content-Type: application/json');
 require "config/Conexion.php";
 
 $datos = json_decode(file_get_contents('php://input'), true);
 
 switch($_SERVER['REQUEST_METHOD']) {
     case 'GET':
+        header('Content-Type: application/json');
         $sql = "SELECT id_c, nombre, descripcion FROM categorias";
         $result = $conexion->query($sql);
 
@@ -29,14 +31,16 @@ switch($_SERVER['REQUEST_METHOD']) {
         $stmt->bind_param("ss", $nombre, $descripcion);
 
         if ($stmt->execute()) {
-            echo "Datos insertados con éxito.";
+            echo json_encode(["message" => "Datos insertados con éxito."]);
+           
         } else {
-            echo "Error al insertar datos: " . $stmt->error;
+            echo json_encode(["message" => $stmt->error]);
         }
         $stmt->close();
         break;
 
     case 'PATCH':
+        header('Content-Type: application/json');
         $id = $_GET['id_c'];
         $nombre = $datos['nombre'];
         $descripcion = $datos['descripcion'];
@@ -53,13 +57,14 @@ switch($_SERVER['REQUEST_METHOD']) {
         $sql = "UPDATE categorias SET $actualizaciones_str WHERE id_c = $id";
 
         if ($conexion->query($sql) === TRUE) {
-            echo "Registro actualizado con éxito.";
+            echo json_encode(["message" => "Registro actualizado con éxito."]);
         } else {
-            echo "Error al actualizar registro: " . $conexion->error;
+            echo json_encode(["error" => "Error al actualizar registro: " . $conexion->error]);
         }
         break;
 
     case 'PUT':
+        header('Content-Type: application/json');
         $id_c = $_GET['id_c'];
         $nombre = $datos['nombre'];
         $descripcion = $datos['descripcion'];
@@ -67,9 +72,9 @@ switch($_SERVER['REQUEST_METHOD']) {
         $sql = "UPDATE categorias SET nombre = '$nombre', descripcion = '$descripcion' WHERE id_c = $id_c";
 
         if ($conexion->query($sql) === TRUE) {
-            echo "Registro actualizado con éxito.";
+            echo json_encode(["message" => "Registro actualizado con éxito."]);
         } else {
-            echo "Error al actualizar registro: " . $conexion->error;
+            echo json_encode(["error" => "Error al actualizar registro: " . $conexion->error]);
         }
         break;
 

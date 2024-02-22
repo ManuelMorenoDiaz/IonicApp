@@ -1,4 +1,5 @@
 <?php
+        header('Content-Type: application/json');
 require "config/Conexion.php";
 
 $datos = json_decode(file_get_contents('php://input'), true);
@@ -31,14 +32,16 @@ switch($_SERVER['REQUEST_METHOD']) {
         $stmt->bind_param("issis", $id_usuario, $monto, $fecha_vencimiento, $pagada, $descripcion);
 
         if ($stmt->execute()) {
-            echo "Datos insertados con éxito.";
+            echo json_encode(["message" => "Datos insertados con éxito."]);
+           
         } else {
-            echo "Error al insertar datos: " . $stmt->error;
+            echo json_encode(["message" => $stmt->error]);
         }
         $stmt->close();
         break;
 
         case 'PATCH':
+        header('Content-Type: application/json');
             $id = $datos['id_f'];
             $id_usuario = $datos['id_usuario'];
             $monto = $datos['monto'];
@@ -67,13 +70,14 @@ switch($_SERVER['REQUEST_METHOD']) {
             $sql = "UPDATE Facturas SET $actualizaciones_str WHERE id_f = $id";
     
             if ($conexion->query($sql) === TRUE) {
-                echo "Registro actualizado con éxito.";
+                echo json_encode(["message" => "Registro actualizado con éxito."]);
             } else {
-                echo "Error al actualizar registro: " . $conexion->error;
+                echo json_encode(["error" => "Error al actualizar registro: " . $conexion->error]);
             }
             break;
     
         case 'PUT':
+        header('Content-Type: application/json');
             $id = $datos['id_f'];
             $id_usuario = $datos['id_usuario'];
             $monto = $datos['monto'];
@@ -84,9 +88,9 @@ switch($_SERVER['REQUEST_METHOD']) {
             $sql = "UPDATE Facturas SET id_usuario = '$id_usuario', monto = '$monto', fecha_vencimiento = '$fecha_vencimiento', pagada = '$pagada', descripcion = '$descripcion' WHERE id_f = $id";
     
             if ($conexion->query($sql) === TRUE) {
-                echo "Registro actualizado con éxito.";
+                echo json_encode(["message" => "Registro actualizado con éxito."]);
             } else {
-                echo "Error al actualizar registro: " . $conexion->error;
+                echo json_encode(["error" => "Error al actualizar registro: " . $conexion->error]);
             }
             break;
     
@@ -102,6 +106,10 @@ switch($_SERVER['REQUEST_METHOD']) {
                 echo "Error al eliminar registro: " . $stmt->error;
             }
             $stmt->close();
+            break;
+        
+        default:
+            echo "Método de solicitud no válido.";
             break;
     
 }

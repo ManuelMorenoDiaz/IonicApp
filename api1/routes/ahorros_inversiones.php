@@ -1,10 +1,13 @@
 <?php
+        header('Content-Type: application/json');
+
 require "config/Conexion.php";
 
 $datos = json_decode(file_get_contents('php://input'), true);
 
 switch($_SERVER['REQUEST_METHOD']) {
     case 'GET':
+        header('Content-Type: application/json');
         $sql = "SELECT * FROM Ahorros_Inversiones";
         $result = $conexion->query($sql);
 
@@ -31,14 +34,16 @@ switch($_SERVER['REQUEST_METHOD']) {
         $stmt->bind_param("issis", $id_usuario, $tipo, $monto, $fecha, $descripcion);
 
         if ($stmt->execute()) {
-            echo "Datos insertados con éxito.";
+            echo json_encode(["message" => "Datos insertados con éxito."]);
+           
         } else {
-            echo "Error al insertar datos: " . $stmt->error;
+            echo json_encode(["message" => $stmt->error]);
         }
         $stmt->close();
         break;
 
         case 'PATCH':
+        header('Content-Type: application/json');
             $id = $datos['id_a'];
             $id_usuario = $datos['id_usuario'];
             $tipo = $datos['tipo'];
@@ -67,13 +72,15 @@ switch($_SERVER['REQUEST_METHOD']) {
             $sql = "UPDATE Ahorros_Inversiones SET $actualizaciones_str WHERE id_a = $id";
     
             if ($conexion->query($sql) === TRUE) {
-                echo "Registro actualizado con éxito.";
+                echo json_encode(["message" => "Registro actualizado con éxito."]);
             } else {
-                echo "Error al actualizar registro: " . $conexion->error;
+                echo json_encode(["error" => "Error al actualizar registro: " . $conexion->error]);
             }
+            
             break;
     
         case 'PUT':
+        header('Content-Type: application/json');
             $id = $datos['id_a'];
             $id_usuario = $datos['id_usuario'];
             $tipo = $datos['tipo'];
@@ -84,10 +91,11 @@ switch($_SERVER['REQUEST_METHOD']) {
             $sql = "UPDATE Ahorros_Inversiones SET id_usuario = '$id_usuario', tipo = '$tipo', monto = '$monto', fecha = '$fecha', descripcion = '$descripcion' WHERE id_a = $id";
     
             if ($conexion->query($sql) === TRUE) {
-                echo "Registro actualizado con éxito.";
+                echo json_encode(["message" => "Registro actualizado con éxito."]);
             } else {
-                echo "Error al actualizar registro: " . $conexion->error;
+                echo json_encode(["error" => "Error al actualizar registro: " . $conexion->error]);
             }
+            
             break;
     
         case 'DELETE':
@@ -102,6 +110,10 @@ switch($_SERVER['REQUEST_METHOD']) {
                 echo "Error al eliminar registro: " . $stmt->error;
             }
             $stmt->close();
+            break;
+            
+        default:
+            echo "Método de solicitud no válido.";
             break;
     
 }
