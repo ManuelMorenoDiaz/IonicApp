@@ -6,11 +6,11 @@ import { ModalController } from '@ionic/angular';
 import { EditarUsuarioModalPage } from './editar-usuario-modal/editar-usuario-modal.page';
 import { CrearUsuarioModalPage } from './crear-usuario-modal/crear-usuario-modal.page';
 
-
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  styleUrls: ['tab1.page.scss'],
+
 })
 export class Tab1Page implements OnInit {
 public resp: Usuario []=[];

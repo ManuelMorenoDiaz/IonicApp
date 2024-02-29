@@ -1,0 +1,40 @@
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar class="tolb" (click)="redi('tabs/tab1')">
+      <ion-title>Finanzas Personales</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-menu-toggle auto-hide="false">
+        <ion-item (click)="redi('facturas-recordatorios-pagos')">
+          <ion-icon slot="start" name="receipt-outline"></ion-icon>
+          <ion-label>Facturas y Recordatorios de Pagos</ion-label>
+        </ion-item>
+        <ion-item (click)="redi('ahorros-inversiones')" >
+          <ion-icon slot="start" name="wallet-outline"></ion-icon>
+          <ion-label>Ahorros e Inversiones</ion-label>
+        </ion-item>
+        <ion-item (click)="redi('informes-analisis')">
+          <ion-icon slot="start" name="analytics-outline"></ion-icon>
+          <ion-label>Informes y Análisis</ion-label>
+        </ion-item>
+        <ion-item (click)="redi('consejos')" >
+          <ion-icon slot="start" name="bulb-outline"></ion-icon>
+          <ion-label>Consejos</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar class="tolb">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title (click)="redi('tabs/tab1')">Finanzas Personales</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</div>

@@ -22,6 +22,22 @@ const routes: Routes = [
   {
     path: 'principal',
     loadChildren: () => import('./pages/principal/principal.module').then( m => m.PrincipalPageModule)
+  },
+  {
+    path: 'facturas-recordatorios-pagos',
+    loadChildren: () => import('./pages/facturas-recordatorios-pagos/facturas-recordatorios-pagos.module').then( m => m.FacturasRecordatoriosPagosPageModule)
+  },
+  {
+    path: 'ahorros-inversiones',
+    loadChildren: () => import('./pages/ahorros-inversiones/ahorros-inversiones.module').then( m => m.AhorrosInversionesPageModule)
+  },
+  {
+    path: 'informes-analisis',
+    loadChildren: () => import('./pages/informes-analisis/informes-analisis.module').then( m => m.InformesAnalisisPageModule)
+  },
+  {
+    path: 'consejos',
+    loadChildren: () => import('./pages/consejos/consejos.module').then( m => m.ConsejosPageModule)
   }
 ];
 @NgModule({
