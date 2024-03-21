@@ -1,0 +1,36 @@
+<app-navbur></app-navbur>
+
+
+<div style="width: 100%; display: flex; justify-content: end;">
+  <ion-button (click)="abrirModalCrearUsuario()" shape="round" fill="clear" style="color: #02a11f; width: 100px; height: 50px;">
+    <ion-icon slot="icon-only" name="add-outline" style="width: 40px; height: 40px;"></ion-icon>
+  </ion-button>
+</div>
+
+<ion-content >
+
+  <ion-grid style="width: 80%;">
+    <ion-row>
+      <ion-col  style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
+        <ion-card *ngFor="let item of resp" style="background: #f9f9f9; border-radius: 5px; margin: 10px 0; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); width: 250px;">
+          <ion-card-header>
+            <ion-row class="ion-justify-content-between">
+              <ion-card-title style="font-weight: bold; color: #4a4a4a;">{{ item.id_u }}</ion-card-title>
+              <ion-button (click)="item.id_u !== undefined && eliminarDato(item.id_u)" shape="round" fill="clear" style="color: #f53d3d;">
+                <ion-icon slot="icon-only" name="trash-outline" style="width: 20px; height: 20px;"></ion-icon>
+              </ion-button>
+              <ion-button (click)="abrirModalEditarUsuario(item)" shape="round" fill="clear" style="color: #3880ff;">
+                <ion-icon slot="icon-only" name="create-outline" style="width: 20px; height: 20px;"></ion-icon>
+              </ion-button>
+            </ion-row>
+          </ion-card-header>
+          <ion-card-content>
+            <p style="color: #4a4a4a;"><strong>Nombre:</strong> {{ item.nombre }}</p>
+            <p style="color: #4a4a4a;"><strong>Correo:</strong> {{ item.correo }}</p>
+            <p style="color: #4a4a4a;"><strong>Contraseña:</strong> {{ item.contrasena }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

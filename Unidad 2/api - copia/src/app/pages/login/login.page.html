@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Inicio de Sesion
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="content">
+  <div class="contDiv">
+    <form [formGroup]="formularioLogin" class="form">
+      <ion-input label="Correo" type="email" label-placement="floating" fill="outline" formControlName="correo" class="input">
+      </ion-input>
+      <ion-input label="Contraseña" type="password" label-placement="floating" fill="outline" formControlName="contrasena"
+        class="input">
+      </ion-input>
+      <ion-button expand="full" (click)="ingresar()" fill="solid" class="button-login">Iniciar</ion-button>
+    </form>
+  </div>
+</ion-content>

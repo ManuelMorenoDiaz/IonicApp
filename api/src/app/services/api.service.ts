@@ -9,20 +9,20 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ApiService {
-  public apiUrl = 'http://127.0.0.1:80/api1/usuarios/';
+  public apiUrl = 'http://127.0.0.1:80/api1/gastos/';
 
   constructor(private http: HttpClient) { }
 
   getTopHeadlines(): Observable<Usuario> {
     return this.http.get<Usuario>(this.apiUrl ).pipe(
       map(resp => resp)
+
     );
   }
 
   loginUsuario(usuario: Usuario): Observable<any> {
     return this.http.post<any>('http://localhost/api1/login/', usuario, { responseType: 'text' as 'json' });
   }
-
 
   registrarUsuario(usuario: Usuario): Observable<any> {
     return this.http.post<any>(this.apiUrl, usuario, { responseType: 'text' as 'json' });
@@ -39,6 +39,4 @@ export class ApiService {
   actualizarUsuario(usuario: Usuario): Observable<any> {
     return this.http.put<any>(this.apiUrl, usuario,);
   }
-
-
 }

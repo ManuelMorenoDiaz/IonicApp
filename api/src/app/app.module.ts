@@ -20,7 +20,6 @@ import { CrearUsuarioModalPageModule } from './pages/tab1/crear-usuario-modal/cr
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    // Añade el módulo de tu página al array de imports
     EditarUsuarioModalPageModule,
     CrearUsuarioModalPageModule
 

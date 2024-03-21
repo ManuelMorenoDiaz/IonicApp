@@ -1,0 +1,26 @@
+.contDiv {
+  display: flex;
+  flex-direction: column !important;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.form {
+  margin: 20px 0;
+  width: 80%;
+  max-width: 500px;
+  height: auto;
+  background-color: white;
+}
+
+.form > .input {
+  margin: 5px;
+}
+
+.button-login{
+  --background: rgb(102, 0, 153);
+  --background-activated: rgb(143, 5, 212);
+}
+
+
