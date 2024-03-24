@@ -1,9 +1,44 @@
+
+.pan{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.del{
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1{
+  font-size: 35px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 .button-login{
-  --background: rgb(102, 0, 153);
-  --background-activated: rgb(143, 5, 212);
+  background: rgb(0, 0, 0);
+  height: 40px;
+  border-radius: 2px;
+  color: white;
+  width: 80%;
+  margin: 5px 0;
 }
 
 .button-registro{
-  --background: rgb(210, 210, 210);
-  --background-activated: rgb(143, 5, 212);
+  background: rgb(255, 255, 255);
+  border: 1px solid black;
+  height: 40px;
+  border-radius: 2px;
+  color: rgb(0, 0, 0);
+  width: 80%;
+
 }

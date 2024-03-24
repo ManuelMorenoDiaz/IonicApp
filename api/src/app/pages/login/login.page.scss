@@ -1,3 +1,12 @@
+.content{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .contDiv {
   display: flex;
   flex-direction: column !important;
@@ -6,21 +15,32 @@
   width: 100%;
 }
 
+h2{
+  font-size: 30px;
+  font-weight: 500;
+  text-align: center;
+}
+
 .form {
-  margin: 20px 0;
-  width: 80%;
+
+  width: 90%;
   max-width: 500px;
   height: auto;
   background-color: white;
+  // border: 1px solid black;
 }
 
 .form > .input {
-  margin: 5px;
+  margin: 5px 0;
 }
 
 .button-login{
-  --background: rgb(102, 0, 153);
-  --background-activated: rgb(143, 5, 212);
+  background: rgb(0, 0, 0);
+  height: 40px;
+  border-radius: 2px;
+  color: white;
+  width: 100%;
+  margin: 5px 0;
 }
 
 

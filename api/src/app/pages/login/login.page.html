@@ -9,15 +9,17 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="content">
+<div  class="content">
   <div class="contDiv">
+    <ion-icon class="icono" name="key-outline" style="font-size: 150px; color: #000000;"></ion-icon>
+    <h2 style="color: #000000; margin-top: 5px;">“Inicia tu camino hacia la libertad financiera”</h2>
     <form [formGroup]="formularioLogin" class="form">
       <ion-input label="Correo" type="email" label-placement="floating" fill="outline" formControlName="correo" class="input">
       </ion-input>
       <ion-input label="Contraseña" type="password" label-placement="floating" fill="outline" formControlName="contrasena"
         class="input">
       </ion-input>
-      <ion-button expand="full" (click)="ingresar()" fill="solid" class="button-login">Iniciar</ion-button>
+      <button expand="full" (click)="ingresar()" fill="solid" class="button-login">Iniciar</button>
     </form>
   </div>
-</ion-content>
+</div>
