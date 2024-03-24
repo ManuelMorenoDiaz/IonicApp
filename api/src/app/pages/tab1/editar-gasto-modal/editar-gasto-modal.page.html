@@ -1,0 +1,32 @@
+
+  <ion-header>
+    <ion-toolbar style="background-color: #ffffff;">
+      <ion-title style="color: #000000;">Editar Gasto</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="cerrarModal()" style="color: #f53d3d;">Cerrar</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="pepe" style="background-color: #ffffff; border-radius: 15px;">
+    <form [formGroup]="formulario">
+      <ion-item lines="none">
+        <ion-input placeholder="Costo" formControlName="monto" style="border-bottom: 1px solid #d7d8da; color: #000000;"></ion-input>
+      </ion-item>
+      <ion-item lines="none" style="display: flex; justify-content: center; align-items: center; width: 100%;">
+        <ion-datetime displayFormat="YYYY-MM-DD" formControlName="fecha" style="color: #000000;"></ion-datetime>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label style="color: #000000;">Categoría</ion-label>
+        <ion-select formControlName="id_categoria">
+          <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.id_categoria" style="color: #000000;">
+            {{ categoria.nombre }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-input placeholder="Descripcion" formControlName="descripcion" style="border-bottom: 1px solid #d7d8da; color: #000000;"></ion-input>
+      </ion-item>
+      <ion-button expand="full" (click)="guardarCambios()" style="margin-top: 20px; background-color: #000000; color: white;">Guardar</ion-button>
+    </form>
+  </ion-content>

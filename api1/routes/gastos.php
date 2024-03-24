@@ -1,5 +1,5 @@
 <?php
-        header('Content-Type: application/json');
+header('Content-Type: application/json');
 require "config/Conexion.php";
 
 $datos = json_decode(file_get_contents('php://input'), true);
@@ -7,7 +7,9 @@ $datos = json_decode(file_get_contents('php://input'), true);
 switch($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         header('Content-Type: application/json');
-        $sql = "SELECT * FROM Gastos";
+        $sql = "SELECT Gastos.*, Usuarios.nombre as nombre_usuario, Categorias.nombre as nombre_categoria FROM Gastos 
+                INNER JOIN Usuarios ON Gastos.id_usuario = Usuarios.id_u 
+                INNER JOIN Categorias ON Gastos.id_categoria = Categorias.id_c";
         $result = $conexion->query($sql);
 
         if ($result->num_rows > 0) {
@@ -22,24 +24,57 @@ switch($_SERVER['REQUEST_METHOD']) {
         }
         break;
 
-    case 'POST':
-        $id_usuario = $datos['id_usuario'];
-        $id_categoria = $datos['id_categoria'];
-        $monto = $datos['monto'];
-        $fecha = $datos['fecha'];
-        $descripcion = $datos['descripcion'];
+        case 'POST':
+            // Para insertar un gasto
+            if (isset($datos['id_usuario'], $datos['id_categoria'], $datos['monto'], $datos['fecha'], $datos['descripcion'])) {
+                $id_usuario = $datos['id_usuario'];
+                $id_categoria = $datos['id_categoria'];
+                $monto = $datos['monto'];
+                $fecha = $datos['fecha'];
+                $descripcion = $datos['descripcion'];
+        
+                $stmt = $conexion->prepare("INSERT INTO Gastos (id_usuario, id_categoria, monto, fecha, descripcion) VALUES (?, ?, ?, ?, ?)");
+                $stmt->bind_param("iisss", $id_usuario, $id_categoria, $monto, $fecha, $descripcion);
+        
+                if ($stmt->execute()) {
+                    echo json_encode(["message" => "Datos insertados con éxito."]);
+                } else {
+                    echo json_encode(["message" => $stmt->error]);
+                }
+                $stmt->close();
+            } 
+            // Para traer 1 gasto
+            else if (isset($datos['id_g'])) {
+                $id_g = $datos['id_g'];
+                $sql = "SELECT * FROM Gastos WHERE id_g = ?";
+                $stmt = $conexion->prepare($sql);
+                $stmt->bind_param("i", $id_g);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $data = $result->fetch_assoc();
+                echo json_encode($data);
+            } 
+            // Para traer los gastos de 1 id_u
+            else if (isset($datos['id_u'])) {
+                $id_u = $datos['id_u'];
+                $sql = "SELECT Gastos.*, Usuarios.nombre as nombre_usuario, Categorias.nombre as nombre_categoria 
+                        FROM Gastos 
+                        INNER JOIN Usuarios ON Gastos.id_usuario = Usuarios.id_u 
+                        INNER JOIN Categorias ON Gastos.id_categoria = Categorias.id_c
+                        WHERE Gastos.id_usuario = ?";
+                $stmt = $conexion->prepare($sql);
+                $stmt->bind_param("i", $id_u);
+                $stmt->execute();
+                $result = $stmt->get_result();
 
-        $stmt = $conexion->prepare("INSERT INTO Gastos (id_usuario, id_categoria, monto, fecha, descripcion) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("iisss", $id_usuario, $id_categoria, $monto, $fecha, $descripcion);
-
-        if ($stmt->execute()) {
-            echo json_encode(["message" => "Datos insertados con éxito."]);
-           
-        } else {
-            echo json_encode(["message" => $stmt->error]);
-        }
-        $stmt->close();
-        break;
+                $data = array();
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+                echo json_encode($data);
+            }
+            break;
+        
 
         case 'PATCH':
         header('Content-Type: application/json');

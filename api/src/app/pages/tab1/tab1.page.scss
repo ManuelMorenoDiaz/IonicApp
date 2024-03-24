@@ -1,0 +1,38 @@
+.card
+{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.top{
+  border-bottom: 0.1px solid rgb(0, 0, 0);
+  padding: 0 10px;
+}
+
+h3{
+  font-size: 15px;
+}
+
+.pro{
+  // border: 2px solid green;
+  height: 100%;
+}
+
+.bot
+{
+  // border: 2px solid red;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+}
+
+
+.options{
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+

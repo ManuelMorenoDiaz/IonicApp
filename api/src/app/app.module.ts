@@ -9,8 +9,8 @@ import { AppComponent } from './app.component';
 import { HttpClientModule} from '@angular/common/http';
 
 // Importa el módulo de tu página aquí
-import { EditarUsuarioModalPageModule } from './pages/tab1/editar-usuario-modal/editar-usuario-modal.module';
-import { CrearUsuarioModalPageModule } from './pages/tab1/crear-usuario-modal/crear-usuario-modal.module';
+import { EditarGastoModalPageModule } from './pages/tab1/editar-gasto-modal/editar-gasto-modal.module';
+import { CrearGastoModalPageModule } from './pages/tab1/crear-gasto-modal/crear-gasto-modal.module';
 
 
 @NgModule({
@@ -20,8 +20,8 @@ import { CrearUsuarioModalPageModule } from './pages/tab1/crear-usuario-modal/cr
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    EditarUsuarioModalPageModule,
-    CrearUsuarioModalPageModule
+    EditarGastoModalPageModule,
+    CrearGastoModalPageModule
 
   ],
 

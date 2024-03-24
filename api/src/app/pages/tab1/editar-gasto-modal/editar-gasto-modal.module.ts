@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { CrearUsuarioModalPage } from './crear-usuario-modal.page';
+import { EditarGastoModalPage } from './editar-gasto-modal.page';
 
 @NgModule({
   imports: [
@@ -11,6 +11,6 @@ import { CrearUsuarioModalPage } from './crear-usuario-modal.page';
     ReactiveFormsModule,
     IonicModule,
   ],
-  declarations: [CrearUsuarioModalPage]
+  declarations: [EditarGastoModalPage]
 })
-export class CrearUsuarioModalPageModule { }
+export class EditarGastoModalPageModule { }

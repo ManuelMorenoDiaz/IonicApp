@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import { Usuario } from '../../interfaces/index';
+import { Gasto } from '../../interfaces/index';
 import { HttpHeaders } from '@angular/common/http';
 import { ModalController } from '@ionic/angular';
-import { EditarUsuarioModalPage } from './editar-usuario-modal/editar-usuario-modal.page';
-import { CrearUsuarioModalPage } from './crear-usuario-modal/crear-usuario-modal.page';
+import { EditarGastoModalPage } from './editar-gasto-modal/editar-gasto-modal.page';
+import { CrearGastoModalPage } from './crear-gasto-modal/crear-gasto-modal.page';
 
 @Component({
   selector: 'app-tab1',
@@ -13,12 +13,14 @@ import { CrearUsuarioModalPage } from './crear-usuario-modal/crear-usuario-modal
 
 })
 export class Tab1Page implements OnInit {
-public resp: Usuario []=[];
+public resp: Gasto []=[];
 
   constructor(private newService: ApiService, private modalController: ModalController) {}
 
   ngOnInit() {
-    this.newService.getTopHeadlines()
+  const id_u = 2;
+
+    this.newService.obtenerGastos(id_u)
       .subscribe(resp => {
         console.log(resp);
         if (Array.isArray(resp)) {
@@ -29,40 +31,41 @@ public resp: Usuario []=[];
       });
   }
 
-  async abrirModalEditarUsuario(usuario: Usuario) {
+
+  async abrirModalEditarGasto(gasto: Gasto) {
     const modal = await this.modalController.create({
-      component: EditarUsuarioModalPage,
+      component: EditarGastoModalPage,
       componentProps: {
-        usuario,
+        gasto,
       },
     });
 
     await modal.present();
   }
 
-  async abrirModalCrearUsuario() {
+  async abrirModalCrearGasto() {
     const modal = await this.modalController.create({
-      component: CrearUsuarioModalPage,
+      component: CrearGastoModalPage,
     });
 
     await modal.present();
   }
 
-  eliminarDato(id_u: number) {
+  eliminarDato(id_g: number) {
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
       body: {
-        "id_u": id_u,
+        "id_g": id_g,
       },
       responseType: 'text'
     };
 
-    this.newService.eliminarDato(id_u, options).subscribe(
+    this.newService.eliminarDato(id_g, options).subscribe(
       () => {
         console.log("Usuario eliminado con éxito");
-        this.resp = this.resp.filter(item => item.id_u !== id_u);
+        this.resp = this.resp.filter(item => item.id_g !== id_g);
       },
       error => {
         console.error("Error al eliminar el usuario:", error);

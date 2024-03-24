@@ -1,7 +1,8 @@
 // ApiService
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Usuario } from '../interfaces';
+import { Gasto, Usuario } from '../interfaces';
+
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -13,12 +14,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getTopHeadlines(): Observable<Usuario> {
-    return this.http.get<Usuario>(this.apiUrl ).pipe(
-      map(resp => resp)
 
-    );
-  }
 
   loginUsuario(usuario: Usuario): Observable<any> {
     return this.http.post<any>('http://localhost/api1/login/', usuario, { responseType: 'text' as 'json' });
@@ -32,11 +28,30 @@ export class ApiService {
     return this.http.post<any>(this.apiUrl, usuario, { responseType: 'text' as 'json' });
   }
 
+  getTopHeadlines(): Observable<Gasto> {
+    return this.http.get<Gasto>(this.apiUrl ).pipe(
+      map(resp => resp)
+    );
+  }
+
+  obtenerGastos(id_u: number): Observable<any> {
+    return this.http.post<any>(this.apiUrl, { id_u: id_u });
+  }
+
+
+  insertarGasto(gasto: Gasto): Observable<any> {
+    return this.http.post<any>(this.apiUrl, gasto, { responseType: 'text' as 'json' });
+  }
+
   eliminarDato(id: number, options?: any): Observable<{}> {
     return this.http.request('delete', this.apiUrl, options);
   }
 
-  actualizarUsuario(usuario: Usuario): Observable<any> {
-    return this.http.put<any>(this.apiUrl, usuario,);
+  actualizarGasto(gasto: Gasto): Observable<any> {
+    return this.http.put<any>(this.apiUrl, gasto,);
+  }
+
+  obtenerCategorias(): Observable<any> {
+    return this.http.get<any>('http://localhost/api1/categorias/');
   }
 }
