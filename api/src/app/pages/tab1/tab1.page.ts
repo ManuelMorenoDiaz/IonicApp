@@ -39,7 +39,8 @@ public resp: Gasto []=[];
         gasto,
       },
     });
-
+    console.log("uuuuuuuuuuuuuuuuuuuuu");
+    console.log(gasto);
     await modal.present();
   }
 
@@ -49,7 +50,8 @@ public resp: Gasto []=[];
     });
 
     await modal.present();
-  }
+}
+
 
   eliminarDato(id_g: number) {
     const options = {

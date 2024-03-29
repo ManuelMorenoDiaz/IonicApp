@@ -1,1 +1,14 @@
+<!-- consejos.page.html -->
 <app-navbur></app-navbur>
+
+<div class="scrollable-content">
+  <ion-list class="cont-list">
+    <ion-item *ngFor="let item of resp" class="card">
+      <ion-label class="con-vid">
+        <h4>{{ item.titulo }}</h4>
+        <!-- Use the safe pipe directly in the iframe src attribute -->
+        <iframe width="90%" height="80%" [src]="getSafeVideoUrl(item.contenido || '')" frameborder="0" allowfullscreen></iframe>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</div>

@@ -11,7 +11,10 @@ import { HttpClientModule} from '@angular/common/http';
 // Importa el módulo de tu página aquí
 import { EditarGastoModalPageModule } from './pages/tab1/editar-gasto-modal/editar-gasto-modal.module';
 import { CrearGastoModalPageModule } from './pages/tab1/crear-gasto-modal/crear-gasto-modal.module';
+import { CrearFacturaModalPageModule } from './pages/facturas-recordatorios-pagos/crear-factura-modal/crear-factura-modal.module';
+import { EventosDelDiaModalPageModule } from './pages/facturas-recordatorios-pagos/eventos-del-dia-modal-page/eventos-del-dia-modal.page.module';
 
+import { SafePipeModule } from './safe.pipe.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +24,10 @@ import { CrearGastoModalPageModule } from './pages/tab1/crear-gasto-modal/crear-
     AppRoutingModule,
     HttpClientModule,
     EditarGastoModalPageModule,
-    CrearGastoModalPageModule
+    CrearGastoModalPageModule,
+    CrearFacturaModalPageModule,
+    EventosDelDiaModalPageModule,
+    SafePipeModule
 
   ],
 

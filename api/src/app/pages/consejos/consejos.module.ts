@@ -10,13 +10,15 @@ import { ConsejosPage } from './consejos.page';
 
 import { NavburModule } from '../navbur/navbur.module';
 
+import { SafePipeModule } from 'src/app/safe.pipe.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ConsejosPageRoutingModule,
-    NavburModule
+    NavburModule,
+    SafePipeModule
   ],
   declarations: [ConsejosPage]
 })

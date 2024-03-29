@@ -1,7 +1,7 @@
 // ApiService
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Gasto, Usuario } from '../interfaces';
+import { Gasto, Usuario, Factura, Consejo } from '../interfaces';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -11,6 +11,9 @@ import { map } from 'rxjs/operators';
 })
 export class ApiService {
   public apiUrl = 'http://127.0.0.1:80/api1/gastos/';
+  public apiUrlFacturas = 'http://127.0.0.1:80/api1/facturas/';
+  public apiUrlConsejos = 'http://127.0.0.1:80/api1/consejos/';
+
 
   constructor(private http: HttpClient) { }
 
@@ -30,6 +33,12 @@ export class ApiService {
 
   getTopHeadlines(): Observable<Gasto> {
     return this.http.get<Gasto>(this.apiUrl ).pipe(
+      map(resp => resp)
+    );
+  }
+
+  getConsejos(): Observable<Consejo> {
+    return this.http.get<Consejo>(this.apiUrlConsejos ).pipe(
       map(resp => resp)
     );
   }
@@ -54,4 +63,23 @@ export class ApiService {
   obtenerCategorias(): Observable<any> {
     return this.http.get<any>('http://localhost/api1/categorias/');
   }
+
+
+
+  obtenerFacturas(id_usuario: number): Observable<any> {
+    return this.http.post<any>(this.apiUrlFacturas, { id_usuario: id_usuario });
+  }
+
+  insertarFactura(factura: Factura): Observable<any> {
+    return this.http.post<any>(this.apiUrlFacturas, factura, { responseType: 'text' as 'json' });
+  }
+
+  eliminarFactura(id: number, options?: any): Observable<{}> {
+    return this.http.request('delete', this.apiUrlFacturas, options);
+  }
+
+  actualizarFactura(gasto: Gasto): Observable<any> {
+    return this.http.put<any>(this.apiUrlFacturas, gasto,);
+  }
+
 }

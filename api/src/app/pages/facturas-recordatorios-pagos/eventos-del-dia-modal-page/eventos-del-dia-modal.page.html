@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Eventos del día</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-neumorfismo">
+  <ion-list>
+    <ion-item *ngFor="let evento of eventos">
+      <ion-label>
+        <h2>No.Referencia: {{ evento.id_f }}</h2>
+        <h3>${{ evento.monto }}</h3>
+        <p>Fecha: {{ evento.fecha_vencimiento }}</p>
+        <p>Descripcion: {{ evento.descripcion }}</p>
+        <div class="pass">
+          <p>Estatus: {{ evento.pagada == 0 ? 'Activa' : 'Inactiva' }}  </p>
+          <ion-button *ngIf="evento.pagada == 0" shape="round" fill="clear" style="color: green;">
+            <ion-icon slot="icon-only" name="checkmark-outline" style="width: 15px; height: 15px;"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

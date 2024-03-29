@@ -18,3 +18,21 @@ export interface Gasto {
   nombre_categoria?: string;
   editing?: boolean;
 }
+
+export interface Factura {
+  id_f?: number;
+  id_usuario?: number;
+  monto?: string;
+  fecha_vencimiento: string;
+  pagada: number;
+  descripcion: string;
+  nombre_usuario: string;
+  editing?: boolean;
+}
+
+
+export interface Consejo {
+  id_c?: number;
+  titulo?: string;
+  contenido?: string;
+}

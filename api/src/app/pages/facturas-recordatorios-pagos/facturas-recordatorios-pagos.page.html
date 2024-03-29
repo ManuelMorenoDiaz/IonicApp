@@ -1,1 +1,11 @@
 <app-navbur></app-navbur>
+
+<div style="width: 100%; display: flex; justify-content: end;">
+  <ion-button (click)="abrirModalCrearFactura()" shape="round" fill="clear" style="color: #02a11f; width: 100px; height: 50px;">
+    <ion-icon slot="icon-only" name="add-outline" style="width: 40px; height: 40px;"></ion-icon>
+  </ion-button>
+</div>
+
+<ion-content class="content">
+  <ion-datetime class="calendario-neumorfismo" presentation="date" [highlightedDates]="highlightedDates" style="width: 100%;" (ionChange)="onDateSelected($event)"></ion-datetime>
+</ion-content>
