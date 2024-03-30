@@ -24,7 +24,6 @@ switch($_SERVER['REQUEST_METHOD']) {
         break;
 
     case 'POST':
-        
         $nombre = $datos['nombre'];
         $correo = $datos['correo'];
         $contrasena = password_hash($datos['contrasena'], PASSWORD_DEFAULT);
@@ -37,7 +36,6 @@ switch($_SERVER['REQUEST_METHOD']) {
            
         } else {
             echo json_encode(["message" => $stmt->error]);
-           
         }
         $stmt->close();
     

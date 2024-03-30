@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import Cookies from 'js-cookie';
 
 @Component({
   selector: 'app-navbur',
@@ -16,6 +16,15 @@ export class NavburComponent  implements OnInit {
   redi(link:string) {
     this.router.navigateByUrl(`/${link}`);
    }
+
+   cerrarSesion() {
+    // Eliminar las cookies
+    Cookies.remove('token');
+    Cookies.remove('id_u');
+
+    // Redirigir al usuario a la página principal
+    this.router.navigate(['']);
+  }
 
 }
 

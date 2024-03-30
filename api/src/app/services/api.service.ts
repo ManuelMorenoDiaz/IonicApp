@@ -24,11 +24,11 @@ export class ApiService {
   }
 
   registrarUsuario(usuario: Usuario): Observable<any> {
-    return this.http.post<any>(this.apiUrl, usuario, { responseType: 'text' as 'json' });
+    return this.http.post<any>('http://localhost/api1/usuarios/', usuario, { responseType: 'text' as 'json' });
   }
 
   insertarUsuario(usuario: Usuario): Observable<any> {
-    return this.http.post<any>(this.apiUrl, usuario, { responseType: 'text' as 'json' });
+    return this.http.post<any>('http://localhost/api1/usuarios/', usuario, { responseType: 'text' as 'json' });
   }
 
   getTopHeadlines(): Observable<Gasto> {
