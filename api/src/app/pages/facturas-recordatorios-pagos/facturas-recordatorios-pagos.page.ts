@@ -7,6 +7,8 @@ import { ModalController } from '@ionic/angular';
 import { CrearFacturaModalPage } from './crear-factura-modal/crear-factura-modal.page';
 import { EventosDelDiaModalPage } from './eventos-del-dia-modal-page/eventos-del-dia-modal.page';
 
+import Cookies from 'js-cookie';
+
 @Component({
   selector: 'app-facturas-recordatorios-pagos',
   templateUrl: './facturas-recordatorios-pagos.page.html',
@@ -19,7 +21,8 @@ export class FacturasRecordatoriosPagosPage implements OnInit {
   constructor(private newService: ApiService, private modalController: ModalController) {}
 
   ngOnInit() {
-    const id_usuario = 16;
+
+    const id_usuario = Number(Cookies.get('id_usu'));
 
     this.newService.obtenerFacturas(id_usuario)
       .subscribe(resp => {

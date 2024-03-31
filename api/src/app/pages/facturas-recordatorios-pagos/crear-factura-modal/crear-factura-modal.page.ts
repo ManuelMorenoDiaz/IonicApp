@@ -4,6 +4,8 @@ import { ModalController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api.service';
 import { Factura } from '../../../interfaces/index';
 
+import Cookies from 'js-cookie';
+
 @Component({
   selector: 'app-crear-factura-modal',
   templateUrl: './crear-factura-modal.page.html',
@@ -14,9 +16,11 @@ export class CrearFacturaModalPage {
   factura: Factura;
 
   constructor(private modalController: ModalController, private apiService: ApiService) {
+    const id_usuario = Number(Cookies.get('id_usu'));
+
     // Inicializa 'usuario' con un objeto que cumple con la interfaz Usuario
     this.factura = {
-      id_usuario:16 ,
+      id_usuario:id_usuario,
       monto: '',
       fecha_vencimiento: '',
       descripcion: '',

@@ -45,6 +45,7 @@ export class LoginPage implements OnInit {
         // Almacenar el token y el id_u en las cookies
         Cookies.set('token', a.token);
         Cookies.set('id_u', a.id_u.toString());
+        Cookies.set('id_usu', a.id_u);
 
         this.router.navigate(['/home/tabs/tab1']);
       } else if(a.message === "Correo o contrasena incorrectos.") {

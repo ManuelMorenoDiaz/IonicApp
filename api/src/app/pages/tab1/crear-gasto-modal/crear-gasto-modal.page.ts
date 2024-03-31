@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api.service';
 import { Gasto } from '../../../interfaces/index';
+import Cookies from 'js-cookie';
 
 @Component({
   selector: 'app-crear-gasto-modal',
@@ -15,9 +16,11 @@ export class CrearGastoModalPage {
   gasto: Gasto;
 
   constructor(private modalController: ModalController, private apiService: ApiService) {
+    const id_usuario = Number(Cookies.get('id_usu'));
+
     // Inicializa 'usuario' con un objeto que cumple con la interfaz Usuario
     this.gasto = {
-      id_usuario:2 ,
+      id_usuario:id_usuario,
       id_categoria: 0,
       monto: '',
       fecha: undefined,

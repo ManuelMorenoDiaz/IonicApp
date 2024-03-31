@@ -5,6 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { ModalController } from '@ionic/angular';
 import { EditarGastoModalPage } from './editar-gasto-modal/editar-gasto-modal.page';
 import { CrearGastoModalPage } from './crear-gasto-modal/crear-gasto-modal.page';
+import Cookies from 'js-cookie';
 
 @Component({
   selector: 'app-tab1',
@@ -18,7 +19,7 @@ public resp: Gasto []=[];
   constructor(private newService: ApiService, private modalController: ModalController) {}
 
   ngOnInit() {
-  const id_u = 2;
+  const id_u = Number(Cookies.get('id_usu'));
 
     this.newService.obtenerGastos(id_u)
       .subscribe(resp => {
