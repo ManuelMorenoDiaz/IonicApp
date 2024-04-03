@@ -15,6 +15,7 @@ import { EditarGastoModalPageModule } from './pages/tab1/editar-gasto-modal/edit
 import { CrearGastoModalPageModule } from './pages/tab1/crear-gasto-modal/crear-gasto-modal.module';
 import { CrearFacturaModalPageModule } from './pages/facturas-recordatorios-pagos/crear-factura-modal/crear-factura-modal.module';
 import { EventosDelDiaModalPageModule } from './pages/facturas-recordatorios-pagos/eventos-del-dia-modal-page/eventos-del-dia-modal.page.module';
+import { CrearAhorroInversionModalPageModule } from './pages/ahorros-inversiones/crear-ahorros-inversiones-modal/crear-ahorros-inversiones-modal.module';
 
 import { SafePipeModule } from './safe.pipe.module';
 
@@ -36,7 +37,8 @@ export function initializeApp(storage: Storage) {
     CrearFacturaModalPageModule,
     EventosDelDiaModalPageModule,
     SafePipeModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    CrearAhorroInversionModalPageModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

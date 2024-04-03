@@ -36,3 +36,14 @@ export interface Consejo {
   titulo?: string;
   contenido?: string;
 }
+
+export interface AhorroInversion{
+  id_a?: number;
+  id_usuario?: number;
+  tipo?: string;
+  monto?: string;
+  fecha?: string;
+  descripcion?: string;
+  nombre_usuario?: string;
+  editing?: boolean;
+}

@@ -47,11 +47,11 @@ export class CrearGastoModalPage {
     };
 
     this.apiService.insertarGasto(nuevoGasto).subscribe(response => {
-      console.log(response.message);
+      // console.log(response.message);
       this.cerrarModal();
     });
 
-    console.log(this.formulario.value);
+    // console.log(this.formulario.value);
   }
 
 

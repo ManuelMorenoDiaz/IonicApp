@@ -1,15 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AhorrosInversionesPage } from './ahorros-inversiones.page';
+import { IonicModule } from '@ionic/angular';
 
-describe('AhorrosInversionesPage', () => {
-  let component: AhorrosInversionesPage;
-  let fixture: ComponentFixture<AhorrosInversionesPage>;
+import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
 
-  beforeEach(async(() => {
-    fixture = TestBed.createComponent(AhorrosInversionesPage);
+import { AhorroInversionPage } from './ahorros-inversiones.page';
+
+
+describe('AhorroInversionPage', () => {
+  let component: AhorroInversionPage;
+  let fixture: ComponentFixture<AhorroInversionPage>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [AhorroInversionPage],
+      imports: [IonicModule.forRoot(), ExploreContainerComponentModule]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(AhorroInversionPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

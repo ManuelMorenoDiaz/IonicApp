@@ -48,7 +48,7 @@ export class CrearFacturaModalPage {
     };
 
     this.apiService.insertarFactura(nuevaFactura).subscribe(response => {
-      console.log(response.message);
+      // console.log(response.message);
       this.cerrarModal();
     });
 

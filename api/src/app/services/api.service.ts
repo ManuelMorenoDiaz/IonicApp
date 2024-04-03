@@ -1,7 +1,7 @@
 // ApiService
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Gasto, Usuario, Factura, Consejo } from '../interfaces';
+import { Gasto, Usuario, Factura, Consejo, AhorroInversion } from '../interfaces';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,11 +13,10 @@ export class ApiService {
   public apiUrl = 'http://127.0.0.1:80/api1/gastos/';
   public apiUrlFacturas = 'http://127.0.0.1:80/api1/facturas/';
   public apiUrlConsejos = 'http://127.0.0.1:80/api1/consejos/';
+  public apiUrlAhorrosInversiones = 'http://127.0.0.1:80/api1/ahorros_inversiones/';
 
 
   constructor(private http: HttpClient) { }
-
-
 
   loginUsuario(usuario: Usuario): Observable<any> {
     return this.http.post<any>('http://localhost/api1/login/', usuario, { responseType: 'text' as 'json' });
@@ -46,7 +45,6 @@ export class ApiService {
   obtenerGastos(id_u: number): Observable<any> {
     return this.http.post<any>(this.apiUrl, { id_u: id_u });
   }
-
 
   insertarGasto(gasto: Gasto): Observable<any> {
     return this.http.post<any>(this.apiUrl, gasto, { responseType: 'text' as 'json' });
@@ -81,5 +79,24 @@ export class ApiService {
   actualizarFactura(gasto: Gasto): Observable<any> {
     return this.http.put<any>(this.apiUrlFacturas, gasto,);
   }
+
+
+  obtenerAhorrosInversiones(id_u: number): Observable<any> {
+    return this.http.post<any>(this.apiUrlAhorrosInversiones, { id_u: id_u });
+  }
+
+  insertarAhorroInversion(AhorroInversion: AhorroInversion): Observable<any> {
+    return this.http.post<any>(this.apiUrlAhorrosInversiones, AhorroInversion, { responseType: 'text' as 'json' });
+  }
+
+  eliminarAhorroInversion(id: number, options?: any): Observable<{}> {
+    return this.http.request('delete', this.apiUrlAhorrosInversiones, options);
+  }
+
+  actualizarAhorroInversione(ahorroInversion: AhorroInversion): Observable<any> {
+    return this.http.put<any>(this.apiUrlAhorrosInversiones, ahorroInversion,);
+  }
+
+
 
 }

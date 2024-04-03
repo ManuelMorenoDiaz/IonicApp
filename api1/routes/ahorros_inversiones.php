@@ -24,21 +24,41 @@ switch($_SERVER['REQUEST_METHOD']) {
         break;
 
     case 'POST':
-        $id_usuario = $datos['id_usuario'];
-        $tipo = $datos['tipo'];
-        $monto = $datos['monto'];
-        $fecha = $datos['fecha'];
-        $descripcion = $datos['descripcion'];
+        if(isset ($datos['id_usuario'], $datos['tipo'], $datos['monto'], $datos['fecha'], $datos['descripcion'])){
+            $id_usuario = $datos['id_usuario'];
+            $tipo = $datos['tipo'];
+            $monto = $datos['monto'];
+            $fecha = $datos['fecha'];
+            $descripcion = $datos['descripcion'];
+            $stmt = $conexion->prepare("INSERT INTO Ahorros_Inversiones (id_usuario, tipo, monto, fecha, descripcion) VALUES (?, ?, ?, ?, ?)");
+            $stmt->bind_param("issss", $id_usuario, $tipo, $monto, $fecha, $descripcion);
 
-        $stmt = $conexion->prepare("INSERT INTO Ahorros_Inversiones (id_usuario, tipo, monto, fecha, descripcion) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("issis", $id_usuario, $tipo, $monto, $fecha, $descripcion);
-
-        if ($stmt->execute()) {
-            echo json_encode(["message" => "Datos insertados con éxito."]);
-           
-        } else {
-            echo json_encode(["message" => $stmt->error]);
+            if ($stmt->execute()) {
+                echo json_encode(["message" => "Datos insertados con éxito."]);
+            
+            } else {
+                echo json_encode(["message" => $stmt->error]);
+            }
         }
+
+        else if (isset($datos['id_u'])) {
+            $id_u = $datos['id_u'];
+            $sql = "SELECT Ahorros_inversiones.*, Usuarios.nombre as nombre_usuario 
+                        FROM Ahorros_inversiones 
+                        INNER JOIN Usuarios ON Ahorros_inversiones.id_usuario = Usuarios.id_u 
+                        WHERE Ahorros_inversiones.id_usuario = ?";
+                $stmt = $conexion->prepare($sql);
+                $stmt->bind_param("i", $id_u);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                $data = array();
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+                echo json_encode($data);
+        }
+
         $stmt->close();
         break;
 

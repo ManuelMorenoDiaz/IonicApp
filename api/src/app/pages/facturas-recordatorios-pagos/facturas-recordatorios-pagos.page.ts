@@ -54,8 +54,8 @@ export class FacturasRecordatoriosPagosPage implements OnInit {
   }
 
   onDateSelected(event:any) {
-    console.log("-------------------");
-    console.log(event.detail);
+    // console.log("-------------------");
+    // console.log(event.detail);
 
     let date = new Date(event.detail.value);
     date.setHours(12); // Establecer la hora a medio día
@@ -70,8 +70,6 @@ export class FacturasRecordatoriosPagosPage implements OnInit {
 
     this.abrirModalEventos(eventosDelDia);
   }
-
-
 
 
   async abrirModalEventos(eventosDelDia:any) {

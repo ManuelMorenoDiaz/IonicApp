@@ -1,23 +1,22 @@
+import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-import { IonicModule } from '@ionic/angular';
-
-import { AhorrosInversionesPageRoutingModule } from './ahorros-inversiones-routing.module';
-
-import { AhorrosInversionesPage } from './ahorros-inversiones.page';
-
+import { AhorroInversionPage } from './ahorros-inversiones.page';
+import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
 import { NavburModule } from '../navbur/navbur.module';
+
+import { AhorroInversionPageRoutingModule } from './ahorros-inversiones-routing.module';
 
 @NgModule({
   imports: [
+    IonicModule,
     CommonModule,
     FormsModule,
-    IonicModule,
-    AhorrosInversionesPageRoutingModule,
-    NavburModule
+    ExploreContainerComponentModule,
+    AhorroInversionPageRoutingModule,
+    NavburModule,
   ],
-  declarations: [AhorrosInversionesPage]
+  declarations: [AhorroInversionPage]
 })
-export class AhorrosInversionesPageModule {}
+export class AhorroInversionPageModule {}

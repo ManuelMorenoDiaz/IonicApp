@@ -1,2 +1,50 @@
 <app-navbur></app-navbur>
 
+<div style="width: 100%; display: flex; justify-content: end;">
+  <ion-button (click)="abrirModalCrearAhorroInversion()" shape="round" fill="clear" style="color: #02a11f; width: 100px; height: 50px;">
+    <ion-icon slot="icon-only" name="add-outline" style="width: 40px; height: 40px;"></ion-icon>
+  </ion-button>
+</div>
+
+<ion-content style="margin-top: 200px;">
+  <div style="width: 80%; margin: auto;" class="cont-top">
+    <div (click)="setFilter('total')">
+      <h3>{{contadorTotal}}</h3>
+      <h4>Total</h4>
+    </div>
+    <div (click)="setFilter('ahorros')">
+      <h3>{{contadorAhorros}}</h3>
+      <h4>Ahorros</h4>
+    </div>
+    <div (click)="setFilter('inversiones')">
+      <h3>{{contadorInversiones}}</h3>
+      <h4>Inversiones</h4>
+    </div>
+  </div>
+  <ion-grid style="width: 80%; margin: auto;">
+    <ion-row>
+      <ion-col style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
+        <ion-card *ngFor="let item of getFilteredItems()" style="background: #ffffff; border-radius: 3px; margin: 10px 0; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3); transition: 0.3s;" class="card">
+          <div class="top">
+            <ion-row class="ion-justify-content-between">
+              <h3 style="font-weight: semibold; color: #000000;">No.Referencia: {{ item.id_a }}</h3>
+              <p style="color: #000000; font-weight: bold; font-size: 20px;" class="pro"> ${{ item.monto }}</p>
+            </ion-row>
+          </div>
+          <ion-card-content class="bot">
+              <div>
+                <p style="color: #4a4a4a;"><strong>Fecha:</strong> {{ item.fecha }}</p>
+                <p style="color: #4a4a4a;"><strong>Tipo:</strong> {{ item.tipo }}</p>
+                <p style="color: #4a4a4a;"><strong>Descripcion:</strong> {{ item.descripcion }}</p>
+              </div>
+              <div class="options">
+                <ion-button (click)="item.id_a !== undefined && eliminarDato(item.id_a)" shape="round" fill="clear" style="color: #000000;">
+                  <ion-icon slot="icon-only" name="trash-outline" style="width: 15px; height: 15px;"></ion-icon>
+                </ion-button>
+              </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

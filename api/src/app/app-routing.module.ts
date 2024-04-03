@@ -32,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: 'ahorros-inversiones',
-    loadChildren: () => import('./pages/ahorros-inversiones/ahorros-inversiones.module').then( m => m.AhorrosInversionesPageModule),
+    loadChildren: () => import('./pages/ahorros-inversiones/ahorros-inversiones.module').then( m => m.AhorroInversionPageModule),
     canActivate: [AuthGuardService]
   },
   {
