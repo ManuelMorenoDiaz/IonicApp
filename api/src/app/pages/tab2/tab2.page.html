@@ -1,1 +1,23 @@
-<app-navbur></app-navbur>
+<ion-content>
+  <app-navbur></app-navbur>
+
+    <div class="cont">
+      <div class="image">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small/profile-icon-design-free-vector.jpg" alt="">
+      </div>
+      <ion-list class="inpts">
+        <ion-item class="item">
+          <ion-input type="text" [(ngModel)]="resp.nombre" placeholder="Nombre"></ion-input>
+        </ion-item>
+        <ion-item class="item">
+          <ion-input type="email" [(ngModel)]="resp.correo" placeholder="Email"></ion-input>
+        </ion-item>
+        <ion-item class="item">
+          <ion-input type="password" [(ngModel)]="resp.contrasena"  placeholder="Contraseña"></ion-input>
+        </ion-item>
+        <button class="btn" (click)="actualizar()">
+          Guardar
+        </button>
+      </ion-list>
+    </div>
+  </ion-content>

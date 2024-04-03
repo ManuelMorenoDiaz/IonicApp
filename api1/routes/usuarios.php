@@ -24,21 +24,36 @@ switch($_SERVER['REQUEST_METHOD']) {
         break;
 
     case 'POST':
-        $nombre = $datos['nombre'];
-        $correo = $datos['correo'];
-        $contrasena = password_hash($datos['contrasena'], PASSWORD_DEFAULT);
+        if(isset($datos['nombre'], $datos['correo'], $datos['contrasena'])){
+            $nombre = $datos['nombre'];
+            $correo = $datos['correo'];
+            $contrasena = password_hash($datos['contrasena'], PASSWORD_DEFAULT);
 
-        $stmt = $conexion->prepare("INSERT INTO usuarios (nombre, correo, contrasena) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $nombre, $correo, $contrasena);
+            $stmt = $conexion->prepare("INSERT INTO usuarios (nombre, correo, contrasena) VALUES (?, ?, ?)");
+            $stmt->bind_param("sss", $nombre, $correo, $contrasena);
 
-        if ($stmt->execute()) {
-            echo json_encode(["message" => "Datos insertados con éxito."]);
-           
-        } else {
-            echo json_encode(["message" => $stmt->error]);
+            if ($stmt->execute()) {
+                echo json_encode(["message" => "Datos insertados con éxito."]);
+            
+            } else {
+                echo json_encode(["message" => $stmt->error]);
+            }
+        }else if(isset($datos['id_u'])){
+            $id_u = $datos['id_u'];
+            $sql="SELECT * FROM Usuarios WHERE id_u = ?";
+            $stmt = $conexion->prepare($sql);
+            $stmt->bind_param("i", $id_u);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $data = $result->fetch_assoc(); // Aquí se obtiene solo la primera fila
+            echo json_encode($data);
         }
+        
+        else{
+            echo json_encode(["message" => "Faltan datos"]);
+        }
+        
         $stmt->close();
-    
         break;
 
     case 'PATCH':

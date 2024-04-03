@@ -30,6 +30,15 @@ export class ApiService {
     return this.http.post<any>('http://localhost/api1/usuarios/', usuario, { responseType: 'text' as 'json' });
   }
 
+  obtenerUsuario(id_u: string): Observable<any> { // Aquí se espera id_u como una cadena
+    return this.http.post<any>('http://localhost/api1/usuarios/', { id_u: id_u });
+  }
+
+
+  actualizarUsuario(usuario: Usuario): Observable<any> {
+    return this.http.put<any>('http://localhost/api1/usuarios/', usuario,);
+  }
+
   getTopHeadlines(): Observable<Gasto> {
     return this.http.get<Gasto>(this.apiUrl ).pipe(
       map(resp => resp)
@@ -61,7 +70,6 @@ export class ApiService {
   obtenerCategorias(): Observable<any> {
     return this.http.get<any>('http://localhost/api1/categorias/');
   }
-
 
 
   obtenerFacturas(id_usuario: number): Observable<any> {
